@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 import os
 from src.test.utils.Utils import take_screen_shot
 
-
 @allure.title("VWO Login Negative Testcase")
 @allure.description("TC1 - Negative TC - VWO Login with invalid creds.")
 @allure.feature("VWO Login with invalid creds")
@@ -37,6 +36,7 @@ def test_app_vwo_login_chrome():
     driver.get(os.getenv("URL"))
     take_screen_shot(driver=driver, name="vwo_login_step_1")
 
+
     email_web_element = driver.find_element(By.ID, "login-username")
     email_web_element.send_keys(os.getenv("INVALID_USERNAME"))
 
@@ -57,3 +57,6 @@ def test_app_vwo_login_chrome():
 
     time.sleep(5)
     driver.quit()
+
+
+

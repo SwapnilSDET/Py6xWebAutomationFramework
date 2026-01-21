@@ -3,14 +3,15 @@ import pytest
 import time
 
 
-@allure.title("Dry-run for the passed test case")
-@allure.description("TC#1 - Dry-run for the passed test case")
+@allure.title("Dry Run of the Passed Testcase")
+@allure.description("TC#1Dry Run of the Passed Testcase")
 def test_sample_pass():
-    print("test_sample_pass")
+    print("Hi")
     assert True == True
 
-@allure.title("Dry-run for the failed test case")
-@allure.description("TC#2 - Dry-run for the failed test case")
+
+@allure.title("Dry Run of the Failed Testcase")
+@allure.description("TC#2 Dry Run of the Failed Testcase")
 def test_sample_fail():
-    print("test_sample_fail")
+    print("Hi")
     assert True == False
