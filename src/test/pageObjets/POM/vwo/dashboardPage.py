@@ -21,7 +21,7 @@ class DashboardPage:
     user_logged_in = (By.XPATH, "//div[@data-qa='nadoqazuxo']/selected-value-slot/span[1]")
     user_logged_in_user_ID = (By.XPATH, "//div[@data-qa='nadoqazuxo']/selected-value-slot/span[2]")
 
-    ## Setting up the locators
+    ## Setting up the locators using Getters
     def get_user_logged_in(self):
         return self.driver.find_element(*DashboardPage.user_logged_in)
 
