@@ -1,5 +1,10 @@
-# Page Locators
-# Page Actions
+"""
+1. Create a class
+2. Create a constructor
+3. Create page locators as a tuple
+4. Define the page locators using get method
+5. Define the page actions
+"""
 
 
 from selenium.webdriver.common.by import By
@@ -9,11 +14,13 @@ class FreeTrialPage:
     def __init__(self, driver):
         self.driver = driver
 
+    ## Page Locators - Need to set as a Tuple
     username_email_ft = (By.XPATH, "//input[@id='page-v1-step1-email']")
     button_click_ft = (By.XPATH, "//button[normalize-space()='Create a Free Trial Account']")
     checkbox_terms = (By.XPATH, "//input[@id='page-756cu-gdpr-consent-checkbox']")
     error_msg_invalid_email = (By.XPATH, "//div[normalize-space()='The email address you entered is incorrect.']")
 
+    ## Setting up the locators
     def get_username_ft(self):
         webdriver_wait(driver=self.driver, element_tuple=self.username_email_ft, timeout=5)
         return self.driver.find_element(*FreeTrialPage.username_email_ft)
@@ -27,10 +34,8 @@ class FreeTrialPage:
     def get_error_msg_invalid_email(self):
         return self.driver.find_element(*FreeTrialPage.error_msg_invalid_email)
 
-    def get_error_message_text(self):
-        webdriver_wait(driver=self.driver, element_tuple=self.error_msg_invalid_email, timeout=15)
-        return self.get_error_msg_invalid_email().text
-
+    ## Page Actions
+    # To perform the "Create a Free Trial Account" action with invalid email
     def enter_free_trial_details_invalid(self, invalid_email):
         try:
             self.get_username_ft().send_keys(invalid_email)
@@ -39,3 +44,10 @@ class FreeTrialPage:
             self.get_button_click_ft().click()
         except Exception as e:
             print(e)
+
+    # To fetch an error message in case of invalid business email id is attempted.
+    def get_error_message_text(self):
+        webdriver_wait(driver=self.driver, element_tuple=self.error_msg_invalid_email, timeout=15)
+        return self.get_error_msg_invalid_email().text
+
+

@@ -7,11 +7,14 @@ import pytest
 
 from selenium import webdriver
 from src.test.constants.Constants import Constants
+from src.test.utils.Utils import *
+
 from src.test.pageObjets.POM.vwo.loginPage import LoginPage
 from src.test.pageObjets.POM.vwo.dashboardPage import DashboardPage
+
 from dotenv import load_dotenv
 import os
-from src.test.utils.Utils import *
+
 
 
 @pytest.fixture
@@ -19,7 +22,8 @@ def setup():
     load_dotenv()
     driver = webdriver.Chrome()
     driver.maximize_window()
-    driver.get(Constants().app_url())
+    # driver.get(Constants.app_url()) - In case of Static
+    driver.get(Constants().app_url()) # - In case of Non-static
     return driver
 
 
@@ -47,13 +51,15 @@ def test_vwo_login_negative(setup):
 def test_vwo_login_positive(setup):
     driver = setup
 
+    # LoginPage actions - Login with valid creds
     login_page = LoginPage(driver=driver)
     login_page.login_to_vwo(
         usr=os.getenv("VALID_USERNAME"),
         pwd=os.getenv("VALID_PASSWORD")
     )
 
+    # DashboardPage actions - Access the username & vetrify the same
     dashboard_page = DashboardPage(driver=driver)
-    user_name = dashboard_page.user_logged_in_text()
+    user_name = dashboard_page.logged_in_username_text()
     take_screen_shot(driver=driver, name="test_vwo_login_positive")
-    assert os.getenv("USERNAME_LOGGED_IN") == user_name
+    assert os.getenv("LOGGED_IN_USERNAME") == user_name

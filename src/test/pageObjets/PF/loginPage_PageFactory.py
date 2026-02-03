@@ -12,6 +12,7 @@ class LoginPage(PageFactory):
         self.driver = driver
         self.highlight = True
 
+    # These locators will be auto initialize
     locators = {
         'username': ('CSS', "#login-username"),
         'password': ('NAME', 'password'),
